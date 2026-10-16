@@ -71,8 +71,15 @@
         owner: deployer
         group: docker
         mode: '0755'
-
+      notify: Restart docker compose
+      
     - name: Run docker compose up on remote host
       community.docker.docker_compose_v2:
         project_src: /opt/app
         state: present
+    
+  handlers:
+    - name: Restart docker compose
+      community.docker.docker_compose_v2:
+        project_src: /opt/app
+        state: restarted

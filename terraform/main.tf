@@ -1,9 +1,6 @@
 terraform {
   required_version = ">= 0.13"
   required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
     docker = {
       source  = "kreuzwerker/docker"
       version = "~> 3.0.2"
@@ -11,15 +8,10 @@ terraform {
   }
 }
 
-provider "yandex" {
-  zone = "ru-central1-a"
-}
-
 provider "docker" {
   host = "unix:///var/run/docker.sock"
 }
 
-# Ресурсы сети, тома и контейнера из вашего задания
 resource "docker_network" "custom_bridge_net" {
   name   = "app_isolated_network"
   driver = "bridge"
